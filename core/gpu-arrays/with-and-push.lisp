@@ -135,7 +135,7 @@
   (assert (or (numberp access) (and (listp access) (every #'keywordp access))))
   (alexandria:once-only (target offset length)
     (let ((access (cffi:foreign-bitfield-value
-                   '%gl::mapbufferusagemask
+                   '%gl::mapbufferaccessmask
                    access)))
       `(let ((,p (%gl:map-buffer-range ,target ,offset ,length ,access)))
          (release-unwind-protect (progn ,@body)
@@ -144,7 +144,7 @@
 (defun+ %process-with-gpu-array-range-macro-args (target access-set)
   (assert (keywordp target))
   (let* ((valid-set-elems (cffi:foreign-bitfield-symbol-list
-                           '%gl::mapbufferusagemask))
+                           '%gl::mapbufferaccessmask))
          (access-set (if (and (listp access-set)
                               (eq (first access-set) 'quote))
                          (second access-set)
