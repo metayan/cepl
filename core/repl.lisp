@@ -7,7 +7,7 @@
    the default for the OS will be used."
   (initialize-cepl :gl-version gl-version)
   (cepl.context::legacy-add-surface (cepl-context) "CEPL" width height nil t
-                                    nil nil t gl-version)
+                                    nil nil t t gl-version)
   (format t "~%-----------------~%    CEPL-REPL    ~%-----------------~%")
   (cls))
 
