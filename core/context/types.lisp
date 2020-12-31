@@ -10,6 +10,7 @@
    (resizable :initarg :resizable)
    (no-frame :initarg :no-frame)
    (hidden :initarg :hidden)
+   (always-on-top :initarg :always-on-top)
    (legacy-gl-version :initarg :legacy-gl-version)))
 
 (eval-when (:compile-toplevel :load-toplevel :execute)

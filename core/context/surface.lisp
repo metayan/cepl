@@ -4,12 +4,13 @@
 
 (defun+ add-surface (context &key (title "CEPL") (width 600) (height 600)
                               (fullscreen nil) (resizable t) (no-frame nil)
-                              (hidden nil) (make-current nil))
+                              (hidden nil) (always-on-top nil) (make-current nil))
   (legacy-add-surface context title width height fullscreen resizable no-frame
-                      hidden make-current nil))
+                      hidden always-on-top make-current nil))
 
 (defun+ legacy-add-surface (context title width height fullscreen resizable
-                                    no-frame hidden make-current gl-version)
+                                    no-frame hidden always-on-top
+                                    make-current gl-version)
   (when (> (length (%cepl-context-surfaces context)) 0)
     (assert (cepl.host:supports-multiple-surfaces-p) ()
             "CEPL: Sorry your current CEPL host does not currently support multiple surfaces "))
@@ -21,6 +22,7 @@
                                  :resizable resizable
                                  :no-frame no-frame
                                  :hidden hidden
+                                 :always-on-top always-on-top
                                  :legacy-gl-version gl-version))
          (surface (if cepl.host::*current-host*
                       (make-surface-from-pending surface)
@@ -76,12 +78,13 @@
   ;;
   (with-slots (title
                width height fullscreen resizable
-               no-frame hidden legacy-gl-version)
+               no-frame hidden always-on-top legacy-gl-version)
       pending-surface
     (cepl.host::make-surface
      :title title :width width :height height
      :fullscreen fullscreen :resizable resizable
      :no-frame no-frame :hidden hidden
+     :always-on-top always-on-top
      :gl-version legacy-gl-version)))
 
 ;;----------------------------------------------------------------------
